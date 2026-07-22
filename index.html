@@ -1,170 +1,429 @@
 <!DOCTYPE html>
 <html lang="en">
-
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Bhatpura Rasoolpur | Mohammad Kaif Khan</title>
+<meta name="description" content="Mohammad Kaif Khan — BCA student, Hafiz-e-Qur'an, cricket & volleyball player, aspiring Data Analyst from Bhatpura Rasoolpur, Shahjahanpur.">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Fraunces:opsz,wght@9..144,400;9..144,500;9..144,600;9..144,700&family=Work+Sans:wght@400;500;600&family=IBM+Plex+Mono:wght@500;600&display=swap" rel="stylesheet">
+<style>
+  :root{
+    --bg-dark:#141b2e;
+    --bg-dark-2:#1c2540;
+    --bg-paper:#f3ede0;
+    --paper-line:#ded4bd;
+    --ink:#241a12;
+    --ink-soft:#4a3d2e;
+    --gold:#d4a65e;
+    --gold-dim:#a67c3d;
+    --green:#5c7a4c;
+    --cream-on-dark:#efe7d6;
+    --max:1120px;
+  }
 
-    <title>Bhatpura Rasoolpur | Mohammad Kaif Khan</title>
+  *{box-sizing:border-box;}
+  html{scroll-behavior:smooth;}
+  @media (prefers-reduced-motion: reduce){
+    html{scroll-behavior:auto;}
+    *{animation-duration:0.001ms !important; animation-iteration-count:1 !important; transition-duration:0.001ms !important;}
+  }
 
-    <link rel="stylesheet" href="style.css">
+  body{
+    margin:0;
+    font-family:'Work Sans', sans-serif;
+    background:var(--bg-paper);
+    color:var(--ink);
+    line-height:1.6;
+  }
 
-    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+  h1,h2,h3{
+    font-family:'Fraunces', serif;
+    margin:0;
+    letter-spacing:-0.01em;
+  }
+
+  .wrap{max-width:var(--max); margin:0 auto; padding:0 24px;}
+  a{color:inherit;}
+
+  /* ---------- NAV ---------- */
+  header.nav{
+    position:sticky; top:0; z-index:50;
+    background:rgba(20,27,46,0.88);
+    backdrop-filter:blur(10px);
+    border-bottom:1px solid rgba(212,166,94,0.18);
+  }
+  .nav-inner{
+    max-width:var(--max); margin:0 auto; padding:16px 24px;
+    display:flex; align-items:center; justify-content:space-between;
+  }
+  .nav-brand{
+    font-family:'Fraunces', serif; font-weight:600; font-size:1.05rem;
+    color:var(--cream-on-dark); text-decoration:none;
+    display:flex; align-items:center; gap:8px;
+  }
+  .nav-brand .dot{width:7px;height:7px;border-radius:50%;background:var(--gold);}
+  nav.links{display:flex; gap:28px;}
+  nav.links a{
+    color:rgba(239,231,214,0.75); text-decoration:none; font-size:0.88rem;
+    font-weight:500; letter-spacing:0.02em; position:relative; padding:4px 0;
+    transition:color 0.2s ease;
+  }
+  nav.links a::after{
+    content:""; position:absolute; left:0; bottom:-2px; width:0; height:1.5px;
+    background:var(--gold); transition:width 0.25s ease;
+  }
+  nav.links a:hover, nav.links a.active{color:var(--cream-on-dark);}
+  nav.links a.active::after{width:100%;}
+  .nav-toggle{display:none; background:none; border:none; color:var(--cream-on-dark); font-size:1.5rem; cursor:pointer;}
+
+  @media (max-width:760px){
+    nav.links{
+      position:absolute; top:100%; left:0; right:0; background:var(--bg-dark);
+      flex-direction:column; gap:0; max-height:0; overflow:hidden;
+      transition:max-height 0.3s ease; border-bottom:1px solid rgba(212,166,94,0.18);
+    }
+    nav.links.open{max-height:340px;}
+    nav.links a{padding:16px 24px; border-top:1px solid rgba(212,166,94,0.08);}
+    .nav-toggle{display:block;}
+  }
+
+  /* ---------- HERO ---------- */
+  .hero{
+    position:relative; overflow:hidden;
+    background:var(--bg-dark);
+    color:var(--cream-on-dark);
+    padding:120px 0 100px;
+  }
+  .hero-field{
+    position:absolute; inset:0; opacity:0.35; pointer-events:none;
+  }
+  .hero .wrap{position:relative; z-index:1;}
+  .eyebrow{
+    font-family:'IBM Plex Mono', monospace; font-size:0.78rem; letter-spacing:0.14em;
+    text-transform:uppercase; color:var(--gold); margin-bottom:18px; display:flex; align-items:center; gap:10px;
+  }
+  .eyebrow::before{content:""; width:26px; height:1px; background:var(--gold-dim);}
+  .hero h1{
+    font-size:clamp(2.6rem, 6vw, 4.6rem); font-weight:600; line-height:1.02;
+    max-width:14ch;
+  }
+  .hero .roles{
+    margin-top:22px; display:flex; flex-wrap:wrap; gap:10px 0;
+    font-family:'IBM Plex Mono', monospace; font-size:0.82rem; color:rgba(239,231,214,0.7);
+  }
+  .hero .roles span{white-space:nowrap;}
+  .hero .roles span:not(:last-child)::after{content:" / "; color:var(--gold-dim); margin:0 8px;}
+  .hero-cta{
+    margin-top:44px; display:inline-flex; align-items:center; gap:10px;
+    background:var(--gold); color:var(--bg-dark); text-decoration:none;
+    font-weight:600; font-size:0.92rem; padding:14px 26px; border-radius:2px;
+    transition:transform 0.2s ease, background 0.2s ease;
+  }
+  .hero-cta:hover{background:#e3b872; transform:translateY(-2px);}
+  .hero-cta svg{width:14px; height:14px;}
+
+  /* ---------- SECTION SCAFFOLD ---------- */
+  section{padding:96px 0;}
+  .section-head{margin-bottom:56px;}
+  .section-num{
+    font-family:'IBM Plex Mono', monospace; font-size:0.76rem; color:var(--gold-dim);
+    letter-spacing:0.1em; margin-bottom:10px; display:block;
+  }
+  .section-title{font-size:clamp(1.8rem, 3.4vw, 2.6rem); font-weight:600;}
+  .on-dark{background:var(--bg-dark); color:var(--cream-on-dark);}
+  .on-dark .section-num{color:var(--gold);}
+
+  .reveal{opacity:0; transform:translateY(22px); transition:opacity 0.7s ease, transform 0.7s ease;}
+  .reveal.in{opacity:1; transform:translateY(0);}
+
+  /* ---------- ABOUT ---------- */
+  .about-grid{display:grid; grid-template-columns:280px 1fr; gap:56px; align-items:start;}
+  @media (max-width:720px){.about-grid{grid-template-columns:1fr;}}
+  .portrait-frame{
+    width:100%; aspect-ratio:4/5; border-radius:3px; overflow:hidden;
+    background:linear-gradient(160deg, var(--bg-dark), var(--bg-dark-2));
+    border:1px solid var(--paper-line);
+    display:flex; align-items:center; justify-content:center; position:relative;
+  }
+  .portrait-frame img{width:100%; height:100%; object-fit:cover; display:block;}
+  .portrait-fallback{
+    font-family:'Fraunces', serif; font-size:3.6rem; color:var(--gold); font-weight:600;
+  }
+  .about-body p{margin:0 0 16px; color:var(--ink-soft); font-size:1.02rem;}
+  .about-body strong{color:var(--ink);}
+  blockquote.dream{
+    margin:28px 0 0; padding:20px 22px; border-left:3px solid var(--gold);
+    background:rgba(212,166,94,0.08); font-family:'Fraunces', serif;
+    font-style:italic; font-size:1.15rem; color:var(--ink);
+  }
+
+  /* ---------- VILLAGE ---------- */
+  .village-grid{display:grid; grid-template-columns:1.1fr 0.9fr; gap:48px; align-items:center;}
+  @media (max-width:720px){.village-grid{grid-template-columns:1fr;}}
+  .village-copy p{color:rgba(239,231,214,0.75); margin:0 0 14px;}
+  .village-tags{display:flex; flex-wrap:wrap; gap:10px; margin-top:22px;}
+  .village-tags span{
+    font-family:'IBM Plex Mono', monospace; font-size:0.76rem; border:1px solid rgba(212,166,94,0.35);
+    color:var(--gold); padding:7px 12px; border-radius:2px;
+  }
+  .village-facts{
+    background:var(--bg-dark-2); border:1px solid rgba(212,166,94,0.15); border-radius:3px; padding:26px;
+  }
+  .village-facts div{display:flex; justify-content:space-between; padding:12px 0; border-bottom:1px dashed rgba(212,166,94,0.18); font-size:0.9rem;}
+  .village-facts div:last-child{border-bottom:none;}
+  .village-facts span.label{color:rgba(239,231,214,0.55); font-family:'IBM Plex Mono', monospace; font-size:0.76rem; text-transform:uppercase; letter-spacing:0.06em;}
+  .village-facts span.val{color:var(--cream-on-dark); font-weight:500;}
+
+  /* ---------- SCOREBOARD / ACHIEVEMENTS ---------- */
+  .board{display:grid; grid-template-columns:repeat(2, 1fr); gap:2px; background:var(--paper-line); border:1px solid var(--paper-line);}
+  @media (max-width:640px){.board{grid-template-columns:1fr;}}
+  .board-card{background:var(--bg-paper); padding:32px 28px;}
+  .board-card .k-label{
+    font-family:'IBM Plex Mono', monospace; font-size:0.76rem; letter-spacing:0.08em;
+    text-transform:uppercase; color:var(--gold-dim); margin-bottom:14px;
+  }
+  .board-card .k-main{
+    font-family:'IBM Plex Mono', monospace; font-weight:600; font-size:2.1rem; color:var(--ink);
+    display:flex; align-items:baseline; gap:10px;
+  }
+  .board-card .k-main small{font-size:0.9rem; font-weight:500; color:var(--ink-soft); font-family:'Work Sans', sans-serif;}
+  .board-card .k-sub{margin-top:6px; font-size:0.86rem; color:var(--ink-soft);}
+  .board-card.wide{grid-column:1 / -1;}
+  .skill-row{display:flex; flex-wrap:wrap; gap:10px; margin-top:16px;}
+  .skill-row span{
+    font-family:'IBM Plex Mono', monospace; font-size:0.78rem; background:var(--bg-dark);
+    color:var(--gold); padding:8px 14px; border-radius:2px;
+  }
+
+  /* ---------- GALLERY ---------- */
+  .gallery-grid{display:grid; grid-template-columns:repeat(3, 1fr); gap:14px;}
+  @media (max-width:720px){.gallery-grid{grid-template-columns:repeat(2, 1fr);}}
+  @media (max-width:460px){.gallery-grid{grid-template-columns:1fr;}}
+  .g-tile{
+    aspect-ratio:1/1; border:1.5px dashed var(--paper-line); border-radius:3px;
+    display:flex; flex-direction:column; align-items:center; justify-content:center; gap:8px;
+    color:var(--ink-soft); background:rgba(212,166,94,0.05);
+  }
+  .g-tile svg{width:26px; height:26px; opacity:0.5;}
+  .g-tile span{font-family:'IBM Plex Mono', monospace; font-size:0.72rem; letter-spacing:0.04em;}
+  .g-tile.img-tile{border-style:solid; padding:0; overflow:hidden;}
+  .g-tile.img-tile img{width:100%; height:100%; object-fit:cover; display:block; transition:transform 0.4s ease;}
+  .g-tile.img-tile:hover img{transform:scale(1.06);}
+
+  /* ---------- CONTACT ---------- */
+  .contact-grid{display:grid; grid-template-columns:repeat(3, 1fr); gap:2px; background:rgba(212,166,94,0.15); border:1px solid rgba(212,166,94,0.15);}
+  @media (max-width:720px){.contact-grid{grid-template-columns:1fr;}}
+  .c-card{background:var(--bg-dark-2); padding:30px 26px;}
+  .c-card .c-label{font-family:'IBM Plex Mono', monospace; font-size:0.74rem; color:var(--gold-dim); text-transform:uppercase; letter-spacing:0.08em; margin-bottom:10px;}
+  .c-card a, .c-card p{margin:0; font-size:1.02rem; color:var(--cream-on-dark); text-decoration:none;}
+  .c-card a:hover{color:var(--gold);}
+
+  footer{
+    background:var(--bg-dark); color:rgba(239,231,214,0.45); text-align:center;
+    padding:26px 24px; font-size:0.8rem; border-top:1px solid rgba(212,166,94,0.1);
+  }
+</style>
 </head>
-
 <body>
 
-<header>
-
-    <nav class="navbar">
-
-        <div class="logo">
-            BHATPURA RASOOLPUR
-        </div>
-
-        <ul class="nav-links">
-            <li><a href="#home">Home</a></li>
-            <li><a href="#about">About</a></li>
-            <li><a href="#village">Village</a></li>
-            <li><a href="#achievement">Achievements</a></li>
-            <li><a href="#gallery">Gallery</a></li>
-            <li><a href="#contact">Contact</a></li>
-        </ul>
-
+<header class="nav">
+  <div class="nav-inner">
+    <a href="#home" class="nav-brand"><span class="dot"></span> Bhatpura Rasoolpur</a>
+    <button class="nav-toggle" id="navToggle" aria-label="Toggle menu">☰</button>
+    <nav class="links" id="navLinks">
+      <a href="#home">Home</a>
+      <a href="#about">About</a>
+      <a href="#village">Village</a>
+      <a href="#achievements">Achievements</a>
+      <a href="#gallery">Gallery</a>
+      <a href="#contact">Contact</a>
     </nav>
-
+  </div>
 </header>
 
-<section id="home" class="hero">
-
-    <div class="hero-text">
-
-        <h3>🏡 Welcome To</h3>
-
-        <h1>Bhatpura Rasoolpur</h1>
-
-        <h2>Mohammad Kaif Khan</h2>
-
-        <p>
-            BCA Student • Future Data Analyst • Hafiz-e-Qur'an • Cricket Player • Volleyball Player
-        </p>
-
-        <a href="#about" class="btn">Explore More</a>
-
+<section class="hero" id="home">
+  <svg class="hero-field" viewBox="0 0 1200 500" preserveAspectRatio="none" aria-hidden="true">
+    <defs>
+      <linearGradient id="rowFade" x1="0" y1="0" x2="0" y2="1">
+        <stop offset="0%" stop-color="#d4a65e" stop-opacity="0.22"/>
+        <stop offset="100%" stop-color="#d4a65e" stop-opacity="0"/>
+      </linearGradient>
+    </defs>
+    <g stroke="url(#rowFade)" stroke-width="2">
+      <path d="M-50 480 C 250 380, 950 380, 1250 480" fill="none"/>
+      <path d="M-50 430 C 250 340, 950 340, 1250 430" fill="none"/>
+      <path d="M-50 380 C 250 300, 950 300, 1250 380" fill="none"/>
+      <path d="M-50 330 C 250 260, 950 260, 1250 330" fill="none"/>
+      <path d="M-50 280 C 250 220, 950 220, 1250 280" fill="none"/>
+    </g>
+  </svg>
+  <div class="wrap">
+    <span class="eyebrow">Bhatpura Rasoolpur · Shahjahanpur, Uttar Pradesh</span>
+    <h1>Mohammad<br>Kaif Khan</h1>
+    <div class="roles">
+      <span>BCA Student</span><span>Future Data Analyst</span><span>Hafiz-e-Qur'an</span><span>Cricket Player</span><span>Volleyball Player</span>
     </div>
-
-    <div class="hero-image">
-
-        <img src="images/ChatGPT Image Jul 16, 2026, 10_15_14 PM.png" alt="Mohammad Kaif Khan">
-
-    </div>
-
-</section><section id="about">
-
-    <div class="container">
-
-        <h2>👤 About Me</h2>
-
-        <p>
-            My name is <strong>Mohammad Kaif Khan</strong>. I am from
-            <strong>Bhatpura Rasoolpur, Shahjahanpur, Uttar Pradesh</strong>.
-        </p>
-
-        <p>
-            I am currently pursuing <strong>BCA (4th Semester)</strong> from
-            Gandhi Faiz-e-Aam College.
-        </p>
-
-        <p>
-            I completed <strong>Hifz-e-Qur'an</strong> at the age of 14 from
-            Jamiatul Qirat Waikua.
-        </p>
-
-        <p>
-            My dream is to become a successful <strong>Data Analyst</strong>
-            and make my village proud.
-        </p>
-
-    </div>
-
+    <a href="#about" class="hero-cta">Explore My Story
+      <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M5 12h14M13 6l6 6-6 6"/></svg>
+    </a>
+  </div>
 </section>
 
-<section id="village">
-
-    <div class="container">
-
-        <h2>🏡 About Bhatpura Rasoolpur</h2>
-
-        <p>
-            Bhatpura Rasoolpur is a beautiful village located in
-            Powayan Tehsil, Shahjahanpur district, Uttar Pradesh.
-        </p>
-
-        <p>
-            The village has schools, mosques, sports grounds and hardworking people.
-        </p>
-
+<section id="about">
+  <div class="wrap">
+    <div class="section-head reveal">
+      <span class="section-num">01 — Who I Am</span>
+      <h2 class="section-title">About Me</h2>
     </div>
-
+    <div class="about-grid reveal">
+      <div class="portrait-frame">
+        <img id="profileImg" src="images/profile.png" alt="Mohammad Kaif Khan" onerror="this.style.display='none'; document.getElementById('portraitFallback').style.display='flex';">
+        <div class="portrait-fallback" id="portraitFallback" style="display:none;">MK</div>
+      </div>
+      <div class="about-body">
+        <p>My name is <strong>Mohammad Kaif Khan</strong>. I am from <strong>Bhatpura Rasoolpur, Shahjahanpur, Uttar Pradesh</strong>.</p>
+        <p>I am currently pursuing <strong>BCA (4th Semester)</strong> from Gandhi Faiz-e-Aam College.</p>
+        <p>I completed <strong>Hifz-e-Qur'an</strong> at the age of 14 from Jamiatul Qirat Waikua.</p>
+        <blockquote class="dream">"My dream is to become a successful Data Analyst and make my village proud."</blockquote>
+      </div>
+    </div>
+  </div>
 </section>
 
-<section id="achievement">
-
-    <div class="container">
-
-        <h2>🏆 My Achievements</h2>
-
-        <ul>
-            <li>📖 Hafiz-e-Qur'an</li>
-            <li>🏏 Cricket: 14 Wins | 8 Runner-up</li>
-            <li>🏐 Volleyball: 23 Wins | 12 Runner-up</li>
-            <li>💻 Learning Python, HTML, CSS & GitHub</li>
-        </ul>
-
+<section id="village" class="on-dark">
+  <div class="wrap">
+    <div class="section-head reveal">
+      <span class="section-num">02 — Where I'm From</span>
+      <h2 class="section-title">Bhatpura Rasoolpur</h2>
     </div>
+    <div class="village-grid reveal">
+      <div class="village-copy">
+        <p>Bhatpura Rasoolpur is a beautiful village located in Powayan Tehsil, Shahjahanpur district, Uttar Pradesh.</p>
+        <p>The village has schools, mosques, sports grounds and hardworking people — a place that shaped who I am.</p>
+        <div class="village-tags">
+          <span>Schools</span><span>Mosques</span><span>Sports Grounds</span><span>Farming Community</span>
+        </div>
+      </div>
+      <div class="village-facts">
+        <div><span class="label">Village</span><span class="val">Bhatpura Rasoolpur</span></div>
+        <div><span class="label">Tehsil</span><span class="val">Powayan</span></div>
+        <div><span class="label">District</span><span class="val">Shahjahanpur</span></div>
+        <div><span class="label">State</span><span class="val">Uttar Pradesh</span></div>
+      </div>
+    </div>
+  </div>
+</section>
 
+<section id="achievements">
+  <div class="wrap">
+    <div class="section-head reveal">
+      <span class="section-num">03 — Scoreboard</span>
+      <h2 class="section-title">Achievements</h2>
+    </div>
+    <div class="board reveal">
+      <div class="board-card">
+        <div class="k-label">Islamic Scholarship</div>
+        <div class="k-main">Hafiz-e-Qur'an</div>
+        <div class="k-sub">Completed at age 14 · Jamiatul Qirat Waikua</div>
+      </div>
+      <div class="board-card">
+        <div class="k-label">Cricket</div>
+        <div class="k-main">14 <small>Wins</small></div>
+        <div class="k-sub">8 Runner-up finishes</div>
+      </div>
+      <div class="board-card">
+        <div class="k-label">Volleyball</div>
+        <div class="k-main">23 <small>Wins</small></div>
+        <div class="k-sub">12 Runner-up finishes</div>
+      </div>
+      <div class="board-card">
+        <div class="k-label">Currently Learning</div>
+        <div class="k-main">Tech <small>Stack</small></div>
+        <div class="skill-row">
+          <span>Python</span><span>HTML</span><span>CSS</span><span>GitHub</span>
+        </div>
+      </div>
+    </div>
+  </div>
 </section>
 
 <section id="gallery">
-
-    <div class="container">
-
-        <h2>📸 Gallery</h2>
-
-        <p>
-            Village photos, school photos, playground and sports photos will be displayed here.
-        </p>
-
+  <div class="wrap">
+    <div class="section-head reveal">
+      <span class="section-num">04 — Moments</span>
+      <h2 class="section-title">Gallery</h2>
     </div>
-
+    <!-- Add more tiles the same way: <div class="g-tile img-tile"><img src="images/yourphoto.jpg" alt="..."></div> -->
+    <div class="gallery-grid reveal">
+      <div class="g-tile img-tile"><img src="images/village-street.jpg" alt="Street in Bhatpura Rasoolpur village"></div>
+      <div class="g-tile img-tile"><img src="images/school.jpg" alt="J.P. Public School, Bhatpura Rasoolpur"></div>
+      <div class="g-tile img-tile"><img src="images/village-decorated.jpg" alt="Decorated village street, Bhatpura Rasoolpur"></div>
+      <div class="g-tile img-tile"><img src="images/village-gate.jpg" alt="Village entrance gate"></div>
+      <div class="g-tile img-tile"><img src="images/sports-ground.webp" alt="Bhatpura Rasoolpur Club sports ground"></div>
+      <div class="g-tile"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><rect x="3" y="5" width="18" height="14" rx="2"/><circle cx="12" cy="12" r="3.5"/></svg><span>More Soon</span></div>
+    </div>
+  </div>
 </section>
 
-<section id="contact">
-
-    <div class="container">
-
-        <h2>📞 Contact</h2>
-
-        <p><strong>Phone:</strong> 7860648295</p>
-
-        <p><strong>Instagram:</strong> @pathan__kaif_khan4295</p>
-
-        <p><strong>Village:</strong> Bhatpura Rasoolpur, Shahjahanpur, Uttar Pradesh</p>
-
+<section id="contact" class="on-dark">
+  <div class="wrap">
+    <div class="section-head reveal">
+      <span class="section-num">05 — Get In Touch</span>
+      <h2 class="section-title">Contact</h2>
     </div>
-
+    <div class="contact-grid reveal">
+      <div class="c-card">
+        <div class="c-label">Phone</div>
+        <a href="tel:7860648295">7860648295</a>
+      </div>
+      <div class="c-card">
+        <div class="c-label">Instagram</div>
+        <a href="https://instagram.com/pathan__kaif_khan4295" target="_blank" rel="noopener">@pathan__kaif_khan4295</a>
+      </div>
+      <div class="c-card">
+        <div class="c-label">Village</div>
+        <p>Bhatpura Rasoolpur, Shahjahanpur, UP</p>
+      </div>
+    </div>
+  </div>
 </section>
 
-<footer>
+<footer>© 2026 Mohammad Kaif Khan · Bhatpura Rasoolpur</footer>
 
-    <p>
-        © 2026 Mohammad Kaif Khan | Bhatpura Rasoolpur
-    </p>
+<script>
+  // Mobile nav toggle
+  const navToggle = document.getElementById('navToggle');
+  const navLinks = document.getElementById('navLinks');
+  navToggle.addEventListener('click', () => navLinks.classList.toggle('open'));
+  navLinks.querySelectorAll('a').forEach(a => a.addEventListener('click', () => navLinks.classList.remove('open')));
 
-</footer>
+  // Active nav highlight on scroll
+  const sections = document.querySelectorAll('section[id]');
+  const navAnchors = document.querySelectorAll('nav.links a');
+  const setActive = () => {
+    let current = sections[0].id;
+    sections.forEach(sec => {
+      if (window.scrollY >= sec.offsetTop - 120) current = sec.id;
+    });
+    navAnchors.forEach(a => a.classList.toggle('active', a.getAttribute('href') === '#' + current));
+  };
+  window.addEventListener('scroll', setActive);
+  setActive();
 
-<script src="script.js"></script>
+  // Reveal on scroll
+  const revealEls = document.querySelectorAll('.reveal');
+  const io = new IntersectionObserver((entries) => {
+    entries.forEach(entry => {
+      if (entry.isIntersecting) {
+        entry.target.classList.add('in');
+        io.unobserve(entry.target);
+      }
+    });
+  }, { threshold: 0.15 });
+  revealEls.forEach(el => io.observe(el));
+</script>
 
 </body>
-
 </html>
