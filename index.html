@@ -46,6 +46,29 @@
 
   .wrap{max-width:var(--max); margin:0 auto; padding:0 24px;}
   a{color:inherit;}
+  img{max-width:100%;}
+
+  /* ---------- PRELOADER ---------- */
+  #preloader{
+    position:fixed; inset:0; z-index:999; background:var(--bg-dark);
+    display:flex; flex-direction:column; align-items:center; justify-content:center;
+    transition:opacity 0.6s ease, visibility 0.6s ease;
+  }
+  #preloader.hide{opacity:0; visibility:hidden; pointer-events:none;}
+  .pre-mark{
+    font-family:'Fraunces', serif; font-size:1.4rem; color:var(--cream-on-dark);
+    letter-spacing:0.02em; margin-bottom:18px;
+  }
+  .pre-mark span{color:var(--gold);}
+  .pre-bar{width:180px; height:2px; background:rgba(212,166,94,0.2); overflow:hidden; border-radius:2px;}
+  .pre-bar i{display:block; height:100%; width:0%; background:var(--gold); animation:preload 1.4s ease forwards;}
+  @keyframes preload{ to{width:100%;} }
+
+  /* ---------- SCROLL PROGRESS ---------- */
+  #scrollProgress{
+    position:fixed; top:0; left:0; height:2.5px; width:0%; background:var(--gold);
+    z-index:200; transition:width 0.1s linear;
+  }
 
   /* ---------- NAV ---------- */
   header.nav{
@@ -64,9 +87,9 @@
     display:flex; align-items:center; gap:8px;
   }
   .nav-brand .dot{width:7px;height:7px;border-radius:50%;background:var(--gold);}
-  nav.links{display:flex; gap:28px;}
+  nav.links{display:flex; gap:26px;}
   nav.links a{
-    color:rgba(239,231,214,0.75); text-decoration:none; font-size:0.88rem;
+    color:rgba(239,231,214,0.75); text-decoration:none; font-size:0.86rem;
     font-weight:500; letter-spacing:0.02em; position:relative; padding:4px 0;
     transition:color 0.2s ease;
   }
@@ -78,13 +101,13 @@
   nav.links a.active::after{width:100%;}
   .nav-toggle{display:none; background:none; border:none; color:var(--cream-on-dark); font-size:1.5rem; cursor:pointer;}
 
-  @media (max-width:760px){
+  @media (max-width:800px){
     nav.links{
       position:absolute; top:100%; left:0; right:0; background:var(--bg-dark);
       flex-direction:column; gap:0; max-height:0; overflow:hidden;
       transition:max-height 0.3s ease; border-bottom:1px solid rgba(212,166,94,0.18);
     }
-    nav.links.open{max-height:340px;}
+    nav.links.open{max-height:400px;}
     nav.links a{padding:16px 24px; border-top:1px solid rgba(212,166,94,0.08);}
     .nav-toggle{display:block;}
   }
@@ -94,49 +117,75 @@
     position:relative; overflow:hidden;
     background:var(--bg-dark);
     color:var(--cream-on-dark);
-    padding:120px 0 100px;
+    padding:96px 0 70px;
+    min-height:88vh; display:flex; align-items:center;
   }
   .hero-field{
-    position:absolute; inset:0; opacity:0.35; pointer-events:none;
+    position:absolute; inset:0; opacity:0.3; pointer-events:none;
   }
-  .hero .wrap{position:relative; z-index:1;}
+  .hero-glow{
+    position:absolute; top:-10%; right:-10%; width:60%; height:70%;
+    background:radial-gradient(circle, rgba(212,166,94,0.16) 0%, transparent 70%);
+    pointer-events:none;
+  }
+  .hero .wrap{position:relative; z-index:1; display:grid; grid-template-columns:1.15fr 0.85fr; gap:40px; align-items:center; width:100%;}
+  @media (max-width:860px){ .hero .wrap{grid-template-columns:1fr;} .hero-portrait{order:-1; max-width:260px; margin:0 auto;} }
+
   .eyebrow{
     font-family:'IBM Plex Mono', monospace; font-size:0.78rem; letter-spacing:0.14em;
     text-transform:uppercase; color:var(--gold); margin-bottom:18px; display:flex; align-items:center; gap:10px;
+    opacity:0; animation:fadeUp 0.8s ease 0.3s forwards;
   }
   .eyebrow::before{content:""; width:26px; height:1px; background:var(--gold-dim);}
   .hero h1{
-    font-size:clamp(2.6rem, 6vw, 4.6rem); font-weight:600; line-height:1.02;
-    max-width:14ch;
+    font-size:clamp(2.6rem, 6vw, 4.4rem); font-weight:600; line-height:1.03;
+    opacity:0; animation:fadeUp 0.9s ease 0.45s forwards;
   }
   .hero .roles{
     margin-top:22px; display:flex; flex-wrap:wrap; gap:10px 0;
-    font-family:'IBM Plex Mono', monospace; font-size:0.82rem; color:rgba(239,231,214,0.7);
+    font-family:'IBM Plex Mono', monospace; font-size:0.8rem; color:rgba(239,231,214,0.7);
+    opacity:0; animation:fadeUp 0.9s ease 0.6s forwards;
   }
   .hero .roles span{white-space:nowrap;}
   .hero .roles span:not(:last-child)::after{content:" / "; color:var(--gold-dim); margin:0 8px;}
   .hero-cta{
-    margin-top:44px; display:inline-flex; align-items:center; gap:10px;
+    margin-top:40px; display:inline-flex; align-items:center; gap:10px;
     background:var(--gold); color:var(--bg-dark); text-decoration:none;
-    font-weight:600; font-size:0.92rem; padding:14px 26px; border-radius:2px;
+    font-weight:600; font-size:0.9rem; padding:14px 26px; border-radius:2px;
     transition:transform 0.2s ease, background 0.2s ease;
+    opacity:0; animation:fadeUp 0.9s ease 0.75s forwards;
   }
   .hero-cta:hover{background:#e3b872; transform:translateY(-2px);}
   .hero-cta svg{width:14px; height:14px;}
+  @keyframes fadeUp{ from{opacity:0; transform:translateY(16px);} to{opacity:1; transform:translateY(0);} }
+
+  .hero-portrait{
+    position:relative; border-radius:4px; overflow:hidden; aspect-ratio:4/5;
+    border:1px solid rgba(212,166,94,0.25);
+    opacity:0; animation:fadeUp 1s ease 0.5s forwards;
+    transition:transform 0.15s ease-out;
+    will-change:transform;
+  }
+  .hero-portrait img{width:100%; height:100%; object-fit:cover; display:block;}
+  .hero-portrait::after{
+    content:""; position:absolute; inset:0;
+    background:linear-gradient(180deg, transparent 55%, rgba(20,27,46,0.55) 100%);
+  }
 
   /* ---------- SECTION SCAFFOLD ---------- */
-  section{padding:96px 0;}
-  .section-head{margin-bottom:56px;}
+  section{padding:88px 0;}
+  .section-head{margin-bottom:52px;}
   .section-num{
     font-family:'IBM Plex Mono', monospace; font-size:0.76rem; color:var(--gold-dim);
     letter-spacing:0.1em; margin-bottom:10px; display:block;
   }
-  .section-title{font-size:clamp(1.8rem, 3.4vw, 2.6rem); font-weight:600;}
+  .section-title{font-size:clamp(1.8rem, 3.4vw, 2.5rem); font-weight:600;}
   .on-dark{background:var(--bg-dark); color:var(--cream-on-dark);}
   .on-dark .section-num{color:var(--gold);}
 
-  .reveal{opacity:0; transform:translateY(22px); transition:opacity 0.7s ease, transform 0.7s ease;}
+  .reveal{opacity:0; transform:translateY(24px); transition:opacity 0.7s ease, transform 0.7s ease;}
   .reveal.in{opacity:1; transform:translateY(0);}
+  .reveal.d1{transition-delay:0.08s;} .reveal.d2{transition-delay:0.16s;} .reveal.d3{transition-delay:0.24s;} .reveal.d4{transition-delay:0.32s;}
 
   /* ---------- ABOUT ---------- */
   .about-grid{display:grid; grid-template-columns:280px 1fr; gap:56px; align-items:start;}
@@ -159,6 +208,27 @@
     font-style:italic; font-size:1.15rem; color:var(--ink);
   }
 
+  /* ---------- JOURNEY (signature timeline, styled like the village road) ---------- */
+  .journey{position:relative;}
+  .road{
+    position:relative; padding-left:36px;
+    background-image:repeating-linear-gradient(to bottom, var(--gold-dim) 0 10px, transparent 10px 22px);
+    background-size:2px 100%; background-position:6px 0; background-repeat:repeat-y;
+  }
+  .road::before{
+    content:""; position:absolute; left:0; top:4px; bottom:4px; width:2px;
+  }
+  .milestone{position:relative; padding:0 0 44px 30px;}
+  .milestone:last-child{padding-bottom:0;}
+  .milestone::before{
+    content:""; position:absolute; left:-6px; top:2px; width:14px; height:14px; border-radius:50%;
+    background:var(--bg-paper); border:2.5px solid var(--gold); z-index:1;
+  }
+  .milestone.now::before{background:var(--gold);}
+  .milestone .m-year{font-family:'IBM Plex Mono', monospace; font-size:0.74rem; color:var(--gold-dim); letter-spacing:0.06em; text-transform:uppercase; margin-bottom:6px;}
+  .milestone .m-title{font-family:'Fraunces', serif; font-size:1.2rem; font-weight:600; margin-bottom:4px;}
+  .milestone .m-desc{color:var(--ink-soft); font-size:0.94rem; max-width:52ch;}
+
   /* ---------- VILLAGE ---------- */
   .village-grid{display:grid; grid-template-columns:1.1fr 0.9fr; gap:48px; align-items:center;}
   @media (max-width:720px){.village-grid{grid-template-columns:1fr;}}
@@ -179,7 +249,8 @@
   /* ---------- SCOREBOARD / ACHIEVEMENTS ---------- */
   .board{display:grid; grid-template-columns:repeat(2, 1fr); gap:2px; background:var(--paper-line); border:1px solid var(--paper-line);}
   @media (max-width:640px){.board{grid-template-columns:1fr;}}
-  .board-card{background:var(--bg-paper); padding:32px 28px;}
+  .board-card{background:var(--bg-paper); padding:32px 28px; transition:background 0.25s ease;}
+  .board-card:hover{background:#ede4d0;}
   .board-card .k-label{
     font-family:'IBM Plex Mono', monospace; font-size:0.76rem; letter-spacing:0.08em;
     text-transform:uppercase; color:var(--gold-dim); margin-bottom:14px;
@@ -208,9 +279,27 @@
   }
   .g-tile svg{width:26px; height:26px; opacity:0.5;}
   .g-tile span{font-family:'IBM Plex Mono', monospace; font-size:0.72rem; letter-spacing:0.04em;}
-  .g-tile.img-tile{border-style:solid; padding:0; overflow:hidden;}
+  .g-tile.img-tile{border-style:solid; padding:0; overflow:hidden; cursor:pointer; position:relative;}
   .g-tile.img-tile img{width:100%; height:100%; object-fit:cover; display:block; transition:transform 0.4s ease;}
-  .g-tile.img-tile:hover img{transform:scale(1.06);}
+  .g-tile.img-tile:hover img{transform:scale(1.08);}
+  .g-tile.img-tile::after{
+    content:"⤢"; position:absolute; top:8px; right:8px; width:26px; height:26px; border-radius:50%;
+    background:rgba(20,27,46,0.55); color:#fff; font-size:0.85rem; display:flex; align-items:center; justify-content:center;
+    opacity:0; transition:opacity 0.2s ease;
+  }
+  .g-tile.img-tile:hover::after{opacity:1;}
+
+  /* Lightbox */
+  #lightbox{
+    position:fixed; inset:0; background:rgba(10,13,22,0.92); z-index:300;
+    display:none; align-items:center; justify-content:center; padding:40px;
+  }
+  #lightbox.open{display:flex;}
+  #lightbox img{max-width:100%; max-height:85vh; border-radius:3px; box-shadow:0 20px 60px rgba(0,0,0,0.5);}
+  #lightbox .lb-close{
+    position:absolute; top:24px; right:28px; color:var(--cream-on-dark); font-size:1.8rem;
+    background:none; border:none; cursor:pointer; line-height:1;
+  }
 
   /* ---------- CONTACT ---------- */
   .contact-grid{display:grid; grid-template-columns:repeat(3, 1fr); gap:2px; background:rgba(212,166,94,0.15); border:1px solid rgba(212,166,94,0.15);}
@@ -228,6 +317,12 @@
 </head>
 <body>
 
+<div id="preloader">
+  <div class="pre-mark">Bhatpura <span>Rasoolpur</span></div>
+  <div class="pre-bar"><i></i></div>
+</div>
+<div id="scrollProgress"></div>
+
 <header class="nav">
   <div class="nav-inner">
     <a href="#home" class="nav-brand"><span class="dot"></span> Bhatpura Rasoolpur</a>
@@ -235,6 +330,7 @@
     <nav class="links" id="navLinks">
       <a href="#home">Home</a>
       <a href="#about">About</a>
+      <a href="#journey">Journey</a>
       <a href="#village">Village</a>
       <a href="#achievements">Achievements</a>
       <a href="#gallery">Gallery</a>
@@ -244,6 +340,7 @@
 </header>
 
 <section class="hero" id="home">
+  <div class="hero-glow"></div>
   <svg class="hero-field" viewBox="0 0 1200 500" preserveAspectRatio="none" aria-hidden="true">
     <defs>
       <linearGradient id="rowFade" x1="0" y1="0" x2="0" y2="1">
@@ -260,14 +357,19 @@
     </g>
   </svg>
   <div class="wrap">
-    <span class="eyebrow">Bhatpura Rasoolpur · Shahjahanpur, Uttar Pradesh</span>
-    <h1>Mohammad<br>Kaif Khan</h1>
-    <div class="roles">
-      <span>BCA Student</span><span>Future Data Analyst</span><span>Hafiz-e-Qur'an</span><span>Cricket Player</span><span>Volleyball Player</span>
+    <div class="hero-copy">
+      <span class="eyebrow">Bhatpura Rasoolpur · Shahjahanpur, Uttar Pradesh</span>
+      <h1>Mohammad<br>Kaif Khan</h1>
+      <div class="roles">
+        <span>BCA Student</span><span>Future Data Analyst</span><span>Hafiz-e-Qur'an</span><span>Cricket Player</span><span>Volleyball Player</span>
+      </div>
+      <a href="#about" class="hero-cta">Explore My Story
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M5 12h14M13 6l6 6-6 6"/></svg>
+      </a>
     </div>
-    <a href="#about" class="hero-cta">Explore My Story
-      <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M5 12h14M13 6l6 6-6 6"/></svg>
-    </a>
+    <div class="hero-portrait" id="heroPortrait">
+      <img src="images/profile.png" alt="Mohammad Kaif Khan">
+    </div>
   </div>
 </section>
 
@@ -292,10 +394,41 @@
   </div>
 </section>
 
+<section id="journey" class="journey">
+  <div class="wrap">
+    <div class="section-head reveal">
+      <span class="section-num">02 — My Road So Far</span>
+      <h2 class="section-title">The Journey</h2>
+    </div>
+    <div class="road reveal">
+      <div class="milestone">
+        <div class="m-year">Age 14</div>
+        <div class="m-title">Completed Hifz-e-Qur'an</div>
+        <div class="m-desc">Memorized the Holy Qur'an at Jamiatul Qirat Waikua — the foundation everything else is built on.</div>
+      </div>
+      <div class="milestone">
+        <div class="m-year">On the Field</div>
+        <div class="m-title">Cricket & Volleyball</div>
+        <div class="m-desc">14 cricket wins, 23 volleyball wins for my village team — discipline learned on the ground.</div>
+      </div>
+      <div class="milestone now">
+        <div class="m-year">Right Now</div>
+        <div class="m-title">BCA, 4th Semester</div>
+        <div class="m-desc">Studying at Gandhi Faiz-e-Aam College, learning Python, HTML, CSS & GitHub on the side.</div>
+      </div>
+      <div class="milestone">
+        <div class="m-year">Next Stop</div>
+        <div class="m-title">Becoming a Data Analyst</div>
+        <div class="m-desc">Turning numbers into decisions — and making Bhatpura Rasoolpur proud along the way.</div>
+      </div>
+    </div>
+  </div>
+</section>
+
 <section id="village" class="on-dark">
   <div class="wrap">
     <div class="section-head reveal">
-      <span class="section-num">02 — Where I'm From</span>
+      <span class="section-num">03 — Where I'm From</span>
       <h2 class="section-title">Bhatpura Rasoolpur</h2>
     </div>
     <div class="village-grid reveal">
@@ -319,7 +452,7 @@
 <section id="achievements">
   <div class="wrap">
     <div class="section-head reveal">
-      <span class="section-num">03 — Scoreboard</span>
+      <span class="section-num">04 — Scoreboard</span>
       <h2 class="section-title">Achievements</h2>
     </div>
     <div class="board reveal">
@@ -330,13 +463,13 @@
       </div>
       <div class="board-card">
         <div class="k-label">Cricket</div>
-        <div class="k-main">14 <small>Wins</small></div>
-        <div class="k-sub">8 Runner-up finishes</div>
+        <div class="k-main"><span class="count" data-target="14">0</span> <small>Wins</small></div>
+        <div class="k-sub"><span class="count" data-target="8">0</span> Runner-up finishes</div>
       </div>
       <div class="board-card">
         <div class="k-label">Volleyball</div>
-        <div class="k-main">23 <small>Wins</small></div>
-        <div class="k-sub">12 Runner-up finishes</div>
+        <div class="k-main"><span class="count" data-target="23">0</span> <small>Wins</small></div>
+        <div class="k-sub"><span class="count" data-target="12">0</span> Runner-up finishes</div>
       </div>
       <div class="board-card">
         <div class="k-label">Currently Learning</div>
@@ -352,7 +485,7 @@
 <section id="gallery">
   <div class="wrap">
     <div class="section-head reveal">
-      <span class="section-num">04 — Moments</span>
+      <span class="section-num">05 — Moments</span>
       <h2 class="section-title">Gallery</h2>
     </div>
     <!-- Add more tiles the same way: <div class="g-tile img-tile"><img src="images/yourphoto.jpg" alt="..."></div> -->
@@ -367,10 +500,15 @@
   </div>
 </section>
 
+<div id="lightbox">
+  <button class="lb-close" id="lbClose" aria-label="Close">×</button>
+  <img id="lbImg" src="" alt="">
+</div>
+
 <section id="contact" class="on-dark">
   <div class="wrap">
     <div class="section-head reveal">
-      <span class="section-num">05 — Get In Touch</span>
+      <span class="section-num">06 — Get In Touch</span>
       <h2 class="section-title">Contact</h2>
     </div>
     <div class="contact-grid reveal">
@@ -393,6 +531,20 @@
 <footer>© 2026 Mohammad Kaif Khan · Bhatpura Rasoolpur</footer>
 
 <script>
+  // Preloader
+  window.addEventListener('load', () => {
+    setTimeout(() => document.getElementById('preloader').classList.add('hide'), 500);
+  });
+
+  // Scroll progress bar
+  const progress = document.getElementById('scrollProgress');
+  const updateProgress = () => {
+    const h = document.documentElement;
+    const pct = (h.scrollTop / (h.scrollHeight - h.clientHeight)) * 100;
+    progress.style.width = pct + '%';
+  };
+  window.addEventListener('scroll', updateProgress);
+
   // Mobile nav toggle
   const navToggle = document.getElementById('navToggle');
   const navLinks = document.getElementById('navLinks');
@@ -423,6 +575,57 @@
     });
   }, { threshold: 0.15 });
   revealEls.forEach(el => io.observe(el));
+
+  // Count-up numbers
+  const counters = document.querySelectorAll('.count');
+  const countIO = new IntersectionObserver((entries) => {
+    entries.forEach(entry => {
+      if (!entry.isIntersecting) return;
+      const el = entry.target;
+      const target = parseInt(el.dataset.target, 10);
+      const dur = 1200;
+      const start = performance.now();
+      const step = (now) => {
+        const p = Math.min((now - start) / dur, 1);
+        el.textContent = Math.floor(p * target);
+        if (p < 1) requestAnimationFrame(step);
+        else el.textContent = target;
+      };
+      requestAnimationFrame(step);
+      countIO.unobserve(el);
+    });
+  }, { threshold: 0.5 });
+  counters.forEach(el => countIO.observe(el));
+
+  // Hero portrait subtle tilt on mouse move (desktop only)
+  const heroPortrait = document.getElementById('heroPortrait');
+  if (window.matchMedia('(hover: hover)').matches && heroPortrait) {
+    document.querySelector('.hero').addEventListener('mousemove', (e) => {
+      const r = heroPortrait.getBoundingClientRect();
+      const cx = r.left + r.width / 2;
+      const cy = r.top + r.height / 2;
+      const dx = (e.clientX - cx) / r.width;
+      const dy = (e.clientY - cy) / r.height;
+      heroPortrait.style.transform = `rotateY(${dx * 6}deg) rotateX(${-dy * 6}deg)`;
+    });
+    document.querySelector('.hero').addEventListener('mouseleave', () => {
+      heroPortrait.style.transform = 'rotateY(0) rotateX(0)';
+    });
+  }
+
+  // Lightbox for gallery
+  const lightbox = document.getElementById('lightbox');
+  const lbImg = document.getElementById('lbImg');
+  document.querySelectorAll('.g-tile.img-tile img').forEach(img => {
+    img.addEventListener('click', () => {
+      lbImg.src = img.src;
+      lbImg.alt = img.alt;
+      lightbox.classList.add('open');
+    });
+  });
+  document.getElementById('lbClose').addEventListener('click', () => lightbox.classList.remove('open'));
+  lightbox.addEventListener('click', (e) => { if (e.target === lightbox) lightbox.classList.remove('open'); });
+  document.addEventListener('keydown', (e) => { if (e.key === 'Escape') lightbox.classList.remove('open'); });
 </script>
 
 </body>
